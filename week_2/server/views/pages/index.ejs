@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Road to device lab</title>
+  <style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    padding: 1rem;
+    font-family: sans-serif;
+  }
+  .loader {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .loader svg {
+    margin: 1rem 0;
+  }
+  #submit:focus + .loader svg,
+  #submit:active + .loader svg {
+    display: block;
+  }
+  #submit:focus + .loader,
+  #submit:active + .loader {
+    max-height: 7rem;
+  }
+  label, input {
+    display: block;
+  }
+  #query {
+    width: 100%;
+    max-width: 20rem;
+  }
+  ol, ul {
+    padding-left: 1rem;
+  }
+  li {
+    margin-bottom: 0.5rem;
+  }
+  .result {
+    margin-top: 1rem;
+  }
+  </style>
+</head>
+<body>
+  <% include ../partials/header %>
+
+  <form action="/search" method="POST">
+    <label for="query">Your current location</label>
+    <input name="query" id="query" type="text">
+    <input id="submit" type="submit" value="Search location">
+    <div class="loader">
+      <% include ../partials/loader %>
+    </div>
+  </form>
+  <div class="result">
+    <% if (query) { %>
+      <div>From <%= query %>:</div>
+    <% } %>
+
+    <% if (routes) { %>
+      <ol>
+        <% routes.forEach((route)=> { %>
+          <li>In <%= route.distance %> go <%= route.direction %> on <%= route.street %> </li>
+        <% }) %>
+      </ol>
+    <% } %>
+  </div>
+
+
+</body>
+</html>
