@@ -1,12 +1,17 @@
+require('dotenv').config()
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const path = require('path')
+const utils = require('./utils/index.js')
 // const session = require('express-session')
 
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.set('view engine', 'ejs')
+app.use(express.static(path.join(__dirname, 'static')))
 
 // app.use(session({
 //   secret: 'keyboard cat',
@@ -14,31 +19,20 @@ app.use(bodyParser.json())
 //   saveUninitialized: true,
 //   cookie: { secure: false }
 // }))
-const routes = [
-  {
-    step: 1,
-    direction: 'north-west',
-    distance: '400m',
-    street: 'Kalverstraat'
-  },
-  {
-    step: 2,
-    direction: 'north',
-    distance: '100m',
-    street: 'Spui'
-  }
-]
 
-app.set('view engine', 'ejs')
 
-app.get('/', (req, res, next) => {
+
+
+app.get('/', async (req, res, next) => {
   console.log(req.query.q)
-  // post it to maps api
-  // return data
+  let steps
+  if (req.query.q) {
+    steps = await utils.retrieve(req.query.q)
+  }
   res.render(path.join(__dirname, 'views/pages/index'), {
     title: 'Hello World from index.js',
     query: req.query.q,
-    routes: req.query.q ? routes : []
+    steps
   })
 })
 

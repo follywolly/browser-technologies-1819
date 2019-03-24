@@ -1,60 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Road to device lab</title>
-  <style>
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    padding: 1rem;
-    font-family: sans-serif;
-  }
-  .loader {
-    max-height: 0;
-    overflow: hidden;
-    transition: all 0.3s;
-  }
-  .loader svg {
-    margin: 1rem 0;
-  }
-  #submit:focus + .loader svg,
-  #submit:active + .loader svg {
-    display: block;
-  }
-  #submit:focus + .loader,
-  #submit:active + .loader {
-    max-height: 7rem;
-  }
-  label, input {
-    display: block;
-  }
-  #query {
-    width: 100%;
-    max-width: 20rem;
-  }
-  ol, ul {
-    padding-left: 1rem;
-  }
-  li {
-    margin-bottom: 0.5rem;
-  }
-  .result {
-    margin-top: 1rem;
-  }
-  </style>
-</head>
-<body>
+<% include ../partials/head %>
+
   <% include ../partials/header %>
 
-  <form action="/search" method="POST">
-    <label for="query">Your current location</label>
-    <input name="query" id="query" type="text">
-    <input id="submit" type="submit" value="Search location">
+  <form action="/search" class="search__form" method="POST">
+    <label for="query">Fill in your location</label><!--
+    --><input name="query" id="query" type="text" placeholder="Use current location"><!--
+    --><button id="submit" type="submit">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="15.9" height="15.9" viewBox="0 0 15.9 15.9">
+        <defs>
+          <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#ff5858"/>
+            <stop offset="1" stop-color="#f09819"/>
+          </linearGradient>
+        </defs>
+        <path id="Path_99" data-name="Path 99" d="M15.9,14.5l-3.3-3.3A6.847,6.847,0,0,0,14,7,6.957,6.957,0,0,0,7,0,6.957,6.957,0,0,0,0,7a6.957,6.957,0,0,0,7,7,6.847,6.847,0,0,0,4.2-1.4l3.3,3.3ZM2,7A4.951,4.951,0,0,1,7,2a4.951,4.951,0,0,1,5,5,4.951,4.951,0,0,1-5,5A4.951,4.951,0,0,1,2,7Z" fill="url(#linear-gradient)"/>
+      </svg>
+    </button>
     <div class="loader">
       <% include ../partials/loader %>
     </div>
@@ -64,15 +25,13 @@
       <div>From <%= query %>:</div>
     <% } %>
 
-    <% if (routes) { %>
+    <% if (steps) { %>
       <ol>
-        <% routes.forEach((route)=> { %>
-          <li>In <%= route.distance %> go <%= route.direction %> on <%= route.street %> </li>
+        <% steps.forEach((step)=> { %>
+          <li><%= step.mod %> <%= step.type %>: <%= step.instruction %> in <%= step.distance %>m</li>
         <% }) %>
       </ol>
     <% } %>
   </div>
 
-
-</body>
-</html>
+<% include ../partials/footer %>

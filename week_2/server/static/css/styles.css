@@ -1,0 +1,109 @@
+
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: sans-serif;
+  min-height: 100vh;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#353a41+0,292929+100 */
+  background: #353a41; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #353a41 0%, #292929 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #353a41 0%,#292929 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #353a41 0%,#292929 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#353a41', endColorstr='#292929',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+  color: #b7b7b7;
+  padding-bottom: 5rem;
+}
+button, input[type="submit"], .btn {
+  cursor: pointer;
+}
+
+header h1 {
+  text-align: center;
+  font-size: 1.25rem;
+}
+header {
+  padding: 0.5rem;
+  margin-bottom: 5rem;
+}
+
+.search__form {
+  max-width: 20rem;
+  margin: 0 auto;
+}
+
+.search__form input {
+  display: inline-block;
+  width: calc(100% - 40px);
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  margin: 0;
+  height: 40px;
+  border-radius: 4px 0 0 4px;
+}
+.search__form [type="submit"] {
+  width: 40px;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  height: 40px;
+  vertical-align: bottom;
+  background-color: white;
+  border-radius: 0 4px 4px 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.search__form [type="submit"] svg {
+  width: 16px;
+  height: 16px;
+}
+.search__form label {
+  width: 100%;
+  display: block;
+  font-weight: 300;
+  font-size: 14px;
+  margin-bottom: 0.5rem;
+}
+.loader {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.loader svg {
+  margin: 1rem 0;
+}
+#submit:focus + .loader svg,
+#submit:active + .loader svg {
+  display: block;
+}
+#submit:focus + .loader,
+#submit:active + .loader {
+  max-height: 7rem;
+}
+ol, ul {
+  padding: 0;
+  margin: 0;
+  padding-left: 1.25rem;
+  margin-top: 2rem;
+}
+li {
+  margin-bottom: 0.5rem;
+}
+.result {
+  margin-top: 5rem;
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.result li {
+  padding: 0.75rem 1rem;
+  background-color: white;
+  border-radius: 4px;
+  color: #8B8B8B;
+}
