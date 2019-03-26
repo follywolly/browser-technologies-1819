@@ -25,12 +25,22 @@ app.use(express.static(path.join(__dirname, 'static')))
 
 app.get('/', async (req, res, next) => {
   console.log(req.query.q)
-  let steps
+  let results
   if (req.query.q) {
-    steps = await utils.retrieve(req.query.q)
+    results = await utils.locations(req.query.q)
   }
   res.render(path.join(__dirname, 'views/pages/index'), {
-    title: 'Hello World from index.js',
+    query: req.query.q,
+    results
+  })
+})
+app.get('/result', async (req, res, next) => {
+  console.log(req.query.q, req.query.c)
+  let steps
+  if (req.query.c) {
+    steps = await utils.steps(req.query.c)
+  }
+  res.render(path.join(__dirname, 'views/pages/result'), {
     query: req.query.q,
     steps
   })
@@ -38,13 +48,12 @@ app.get('/', async (req, res, next) => {
 
 app.post('/search', (req, res, next) => {
   const query = encodeURI(req.body.query)
-  setTimeout(() => {
-    if (query) {
-      res.redirect('/?q=' + query)
-    } else {
-      res.redirect('/')
-    }
-  }, 3000)
+  console.log(query);
+  if (query) {
+    res.redirect('/?q=' + query)
+  } else {
+    res.redirect('/')
+  }
 })
 
 app.listen(3000, ()=>{
