@@ -3,8 +3,9 @@
   <!-- include ../partials/header -->
 
   <div class="container">
-    <a href="/" aria-label="return to home" class="return">
+    <a href="/" aria-label="return to previous page" title="Return to previous page" class="return">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+        Return to previous page
         <defs>
           <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
             <stop offset="0" stop-color="#ff5858"/>
@@ -19,8 +20,9 @@
     <form action="/search" class="search__form result" method="POST">
       <label class="hidden" for="query">Fill in your location</label><!--
       --><input name="query" id="query" type="text" placeholder="Fill in a location" value="<%= query %>"><!--
-      --><button id="submit" type="submit" aria-label="Search">
+      --><button id="submit" type="submit" aria-label="Edit location" title="Edit location">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+          Edit location
           <defs>
             <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
               <stop offset="0" stop-color="#ff5858"/>
@@ -38,9 +40,9 @@
     <button type="button" name="button" id="list-button">Switch to list view</button>
     <div id="map">
     </div>
-    <div id="result">
+    <section id="result">
       <% if (query) { %>
-        <div>From <%= query %>:</div>
+        <h2>From <%= query %>:</h2>
       <% } %>
 
       <% if (steps && steps.length > 0) { %>
@@ -52,11 +54,7 @@
       <% } else if (steps) { %>
         <p>No route found!</p>
       <% } %>
-    </div>
-
-    <div id="features">
-
-    </div>
+    </section>
   </div>
 
 

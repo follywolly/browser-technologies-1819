@@ -1,16 +1,19 @@
 import config from './secret.js'
 
-var features = document.querySelector('#features')
-
 if ('localStorage' in window) {
-  // features.innerText += 'Localstorage possible \n'
   console.log('localStorage possible');
 }
-
 if ('geolocation' in navigator) {
   handleGeo()
 }
+
 var loaded = false
+
+var mapContainer = document.querySelector('#map')
+
+if (mapContainer) {
+  handleMap()
+}
 
 setTimeout(function(){
   if (loaded) {
@@ -20,12 +23,6 @@ setTimeout(function(){
 
   }
 }, 2000)
-
-var mapContainer = document.querySelector('#map')
-
-if (mapContainer) {
-  handleMap()
-}
 
 function handleGeo() {
   var form = document.querySelector('#search__form')
@@ -95,7 +92,12 @@ function handleMap() {
       trackUserLocation: true
     }))
     setTimeout(
-      function() {
+      function(){
+        var button = document.querySelectorAll('#map .mapboxgl-ctrl-geolocate')[0]
+        if (button) {
+          eventFire(button, 'click')
+        }
+
         var listButton = document.querySelector('#list-button')
         listButton.classList.add('show')
         listButton.addEventListener('click', function(e) {
@@ -104,21 +106,18 @@ function handleMap() {
             listButton.innerText = 'Switch to map view'
             mapContainer.classList.remove('show')
             container.classList.remove('hidden')
+            document.body.classList.remove('map')
+            if ('scrollTo' in window) {
+              window.scrollTo(0,0)
+            }
           } else {
             listButton.innerText = 'Switch to list view'
             mapContainer.classList.add('show')
             container.classList.add('hidden')
+            document.querySelector('body').classList.add('map')
+
           }
         })
-      },
-      0
-    )
-    setTimeout(
-      function(){
-        var button = document.querySelectorAll('#map .mapboxgl-ctrl-geolocate')[0]
-        if (button) {
-          eventFire(button, 'click')
-        }
       },
       1000
     )

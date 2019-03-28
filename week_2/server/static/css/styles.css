@@ -42,6 +42,10 @@ header {
   margin: 0 auto;
   position: relative;
   z-index: 2;
+}
+.search__form.result {
+  display: block;
+  margin-top: 1rem;
   margin-left: 2rem;
 }
 
@@ -158,10 +162,6 @@ li {
   top: 4.5rem;
   left: 1.5rem;
 }
-.search__form.result {
-  display: block;
-  margin-top: 1rem;
-}
 #map {
   background-color: #8b8b8b;
   height: 0;
@@ -171,7 +171,10 @@ li {
   top: 0;
   left: 0;
   height: 100vh;
+  /* height: calc(100vh - 3rem); */
   transition: all 0.3s;
+  z-index: -3;
+  pointer-events: none;
 }
 #map::before {
   display: block;
@@ -183,14 +186,16 @@ li {
   bottom: 0;
   position: absolute;
   background: transparent;
-  background: -moz-linear-gradient(top, rgb(41, 41, 41) 0%, rgba(53, 58, 65, 0) 85%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, rgb(41, 41, 41) 0%, rgba(53, 58, 65, 0) 85%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, rgb(41, 41, 41) 0%, rgba(53, 58, 65, 0) 85%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: -moz-linear-gradient(top, rgb(41, 41, 41) 0%, rgba(53, 58, 65, 0) 50%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, rgb(41, 41, 41) 0%, rgba(53, 58, 65, 0) 50%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgb(41, 41, 41) 0%, rgba(53, 58, 65, 0) 50%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#353a41', endColorstr='#292929',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   pointer-events: none;
 }
 #map.show {
   opacity: 1;
+  z-index: 0;
+  pointer-events: all;
 }
 #map .marker {
   width: 20px;
@@ -199,7 +204,6 @@ li {
   border-radius: 50%;
   background-color: #f09819;
   content: "";
-  z-index: 3;
 }
 #map .marker::before, #map .marker::after {
   width: 20px;
@@ -238,8 +242,9 @@ li {
   pointer-events: none;
 }
 #list-button {
-  position: absolute;
+  position: fixed;
   bottom: 1.5rem;
+  width: 100%;
   width: auto;
   border: 0;
   background: 0;
@@ -251,8 +256,12 @@ li {
   transition: all 0.3s;
   padding: 0.5rem 0.75rem;
   color: #8b8b8b;
-  border-radius: 4px;
   font-size: 1rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
 }
 #list-button.show {
   opacity: 1;
@@ -275,7 +284,7 @@ li {
   }
 }
 @media screen and (min-width: 35rem) {
-  .search__form {
+  .search__form.result {
     margin-left: auto;
   }
 }
