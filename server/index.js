@@ -46,6 +46,10 @@ app.get('/result', async (req, res, next) => {
   })
 })
 
+app.get('/offline', (req, res) => {
+  res.render(path.join(__dirname, 'views/pages/offline'))
+})
+
 app.post('/search', (req, res, next) => {
   const query = encodeURI(req.body.query)
   console.log(query);

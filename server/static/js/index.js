@@ -32,7 +32,6 @@ function handleGeo() {
   if (!form) return
   form.addEventListener('submit', function(e) {
     e.preventDefault()
-    console.log('trying to get current location');
     if (query.value === '') {
       navigator.geolocation.getCurrentPosition(
         function(pos) {
@@ -48,12 +47,13 @@ function handleGeo() {
 }
 
 function handleMap() {
+  var container = document.querySelector('#result')
+  container.classList.add('hidden')
   document.querySelector('body').classList.add('map')
   mapContainer.classList.add('show')
   var center = window.location.search.split('=')[1].split('&')[0].split(',')
   var endCenter = [4.909457, 52.359849]
 
-  var container = document.querySelector('#result')
 
   mapboxgl.accessToken = config.key
   var map = new mapboxgl.Map({
@@ -80,7 +80,6 @@ function handleMap() {
     .setLngLat(endCenter)
     .addTo(map)
 
-  container.classList.add('hidden')
 
   map.on('load', function(){
     getRoute(center, endCenter, map)
@@ -220,12 +219,24 @@ function getLocation(location) {
     if (this.readyState == 4 && this.status == 200) {
       // Typical action to be performed when the document is ready:
       var res = xhttp.responseText
-      res = JSON.parse(res)
-      genOptions(res)
+      var json = parse(res)
+      if (json) {
+        genOptions(json)
+      } else {
+        window.location.href = '/offline'
+      }
     }
   }
   xhttp.open('GET', 'http://cors-anywhere.herokuapp.com/https://api.mapbox.com/geocoding/v5/mapbox.places/'+location+'.json?access_token='+config.key, true)
   xhttp.send()
+}
+
+function parse(data) {
+  try {
+    return JSON.parse(data)
+  } catch (e) {
+    return false
+  }
 }
 
 

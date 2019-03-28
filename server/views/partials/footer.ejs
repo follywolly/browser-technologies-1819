@@ -1,0 +1,21 @@
+  <script type="text/javascript">
+    if ("serviceWorker" in navigator) {
+      if (!navigator.serviceWorker.controller) {
+        navigator.serviceWorker
+          .register("/sw.js", {
+            scope: "./"
+          })
+          .then(function(registration) {
+            console.log("Service Worker Registered", registration);
+          })
+          .catch(function(err) {
+            console.log("Service Worker Failed to Register", err);
+          })
+      }
+    }
+  </script>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+  <script type="module" src="/js/index.js"></script>
+
+</body>
+</html>
