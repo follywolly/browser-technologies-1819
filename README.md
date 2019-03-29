@@ -14,7 +14,7 @@ Try disabling javascript, disabling your internet connection or old browsers to 
 5. [Features](#Features)
 6. [Codebase](#Codebase)
 7. [Features](#Features)   
-7. [Conclusion](#Conclusion)   
+7. [To do](#To-do)   
 
 [License](#License)
 
@@ -88,9 +88,20 @@ The server is written in Node, which is independent of clientside availability o
 - When flexbox is not available, everything still renders, the design is just a little less nice. No big breaks there.
 
 ## Testing
+After all the planning and coding, it was time to take my progressively enhanced prototype to the test.
+I've tried it out in several browsers and used the device lab to test if the prototype works.
 The prototype works on all devices of the device lab: during the test some devices were very slow in loading the map, so I added adding a fallback for slow loading to the to-do list.
+![Test image](/docs/test_1.jpg)
+![Test image](/docs/test_2.jpg)
+![Test image](/docs/test_3.jpg)
+![Test image](/docs/test_4.jpg)
+![Test image](/docs/test_5.jpg)
+![Test image](/docs/test_6.jpg)
 
-## Conclusion
+
+## To-do
+- fallback for slow loading map
+
 
 ## License
 [MIT](LICENSE) @ [follywolly](https://folkertjan.nl/)
